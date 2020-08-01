@@ -76,6 +76,19 @@ async def start_game(ctx, arg):
         response = response.format(arg)
         await ctx.send(response)
 
+@bot.command(name='leaderboard', help='Show the leaderboards, deafults to win percentage. Use "wins" to sort by number of wins')
+async def leaderboard(ctx, *args):
+    entries = get_all_players(bot.db)
+    if args:
+        entries =  sorted(entries, key = lambda i: (i[1]['w'], i[1]['wp']), reverse=True)
+    else:
+        entries =  sorted(entries, key = lambda i: (i[1]['wp'], i[1]['w']), reverse=True)  
+    response = PrettyTable(['Name', "Wins", "Loses", "Win %"])
+    for entry in entries:
+        response.add_row([entry[0], entry[1]['w'], entry[1]['l'], entry[1]['wp']])
+    response = "```\n" + response.get_string() + "```\n"
+    await ctx.send(response)
+
 @bot.command(name='leaderboards', help='Show the leaderboards, deafults to win percentage. Use "wins" to sort by number of wins')
 async def leaderboards(ctx, *args):
     entries = get_all_players(bot.db)
