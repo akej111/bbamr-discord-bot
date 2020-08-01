@@ -76,10 +76,10 @@ async def start_game(ctx, arg):
         response = response.format(arg)
         await ctx.send(response)
 
-@bot.command(name='leaderboards', help='Show the leaderboards wp to sort by win percentage, wins to sort by number of wins')
+@bot.command(name='leaderboards', help='Show the leaderboards, deafults to win percentage. Use "wins" to sort by number of wins')
 async def leaderboards(ctx, *args):
     entries = get_all_players(bot.db)
-    if args[0] == 'wins':
+    if args[0]:
         entries =  sorted(entries, key = lambda i: (i[1]['w'], i[1]['wp']), reverse=True)
     else:
         entries =  sorted(entries, key = lambda i: (i[1]['wp'], i[1]['w']), reverse=True)  
