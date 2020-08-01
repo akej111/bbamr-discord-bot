@@ -10,54 +10,56 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-db = load_players()
 
-teamA = []
-spymaster_A = ''
-teamB = []
-spymaster_B = ''
-game_live = False
+
 bot = commands.Bot(command_prefix='^')
+bot.db = load_players()
+
+bot.teamA = []
+bot.spymaster_A = ''
+bot.teamB = []
+bot.spymaster_B = ''
+bot.game_live = False
 
 @bot.command(name='start', help='Start a game of codenames, give players in space seperated list')
 async def start_game(ctx, arg):
     print("Starting a new game")
-    print(db)
-    if game_live:
+    print(bot.db)
+    if bot.game_live:
         await ctx.send("Game still live, cancel or give winner with !finish")
 
     players = arg.split(' ')
     random.shuffle(players)
 
-    teamA = players[:len(players)/2]
-    teamB = players[len(players/2):]
+    bot.teamA = players[:len(players)/2]
+    bot.teamB = players[len(players/2):]
 
-    teamA_spymaster = get_team_spymaster(teamA, db)
-    teamB_spymaster = get_team_spymaster(teamB, db)
+    bot.spymaster_A = get_team_spymaster(bot.teamA, bot.db)
+    bot.spymaster_B = get_team_spymaster(bot.teamB, bot.db)
 
 
     response = "Starting game...\nTeam A: {} Spymaster: {}\n Team B: Spymaster: {}"
-    response.format(', '.join(teamA), teamA_spymaster, ', '.join(teamB), teamB_spymaster)
-    game_live = True
+    response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
+    bot.game_live = True
     await ctx.send(response)
 
 @bot.command(name='finish', help='End the current game of codenames, give winner "A" or "B" or "cancel"')
 async def start_game(ctx, arg):
-    if not game_live:
+    if not bot.game_live:
         await ctx.send("No game live, nothing done")
     if arg == 'cancel':
-        game_live = False
+        bot.game_live = False
         response = "Current game cancelled. Game details\n Team A: {} Spymaster: {}\n Team B: Spymaster: {}"
-        response.format(', '.join(teamA), teamA_spymaster, ', '.join(teamB), teamB_spymaster)
+        response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
         await ctx.send(response)
     else:
         if arg == A:
-            finish_game(teamA, teamA_spymaster, teamB, teamB_spymaster, db)
+            finish_game(bot.teamA, bot.spymaster_A, bot.teamB, bot.teamB_spymaster, bot.db)
         else:
-            finish_game(teamB, teamB_spymaster, teamA, teamA_spymaster, db)
+            finish_game(bot.teamB, bot.spymaster_B, bot.teamA, bot.teamA_spymaster, bot.db)
         with open('data.json', 'w') as outfile:
-            json.dump(db, outfile)
-        game_live = False
+            json.dump(bot.db, outfile)
+        bot.game_live = False
         response = "Congrats to Team {}, scores have been updated"
         response.format(arg)
         await ctx.send(response)
