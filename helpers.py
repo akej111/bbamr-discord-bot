@@ -2,7 +2,7 @@ import json
 
 def load_players():
     with open('data.json') as f:
-        db = json.load(f)
+        return json.load(f)
 
 def get_team_spymaster(team, db):
     current_spymaster = ""

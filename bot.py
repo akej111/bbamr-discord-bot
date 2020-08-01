@@ -29,6 +29,10 @@ async def start_game(ctx, arg):
         await ctx.send("Game still live, cancel or give winner with !finish")
 
     players = arg.split(' ')
+    for p in players:
+        if p not in bot.db:
+            await ctx.send("Player {} does not exist. Please add them.".format(p))
+
     random.shuffle(players)
 
     bot.teamA = players[:len(players)/2]
