@@ -35,8 +35,8 @@ async def start_game(ctx, arg):
 
     random.shuffle(players)
 
-    bot.teamA = players[:len(players)/2]
-    bot.teamB = players[len(players/2):]
+    bot.teamA = players[:len(players)//2]
+    bot.teamB = players[len(players)//2:]
 
     bot.spymaster_A = get_team_spymaster(bot.teamA, bot.db)
     bot.spymaster_B = get_team_spymaster(bot.teamB, bot.db)
