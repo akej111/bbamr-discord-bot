@@ -63,10 +63,10 @@ async def start_game(ctx, arg):
         response = response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
         await ctx.send(response)
     else:
-        if arg == A:
-            finish_game(bot.teamA, bot.spymaster_A, bot.teamB, bot.teamB_spymaster, bot.db)
+        if arg == 'A':
+            finish_game(bot.teamA, bot.spymaster_A, bot.teamB, bot.spymaster_B, bot.db)
         else:
-            finish_game(bot.teamB, bot.spymaster_B, bot.teamA, bot.teamA_spymaster, bot.db)
+            finish_game(bot.teamB, bot.spymaster_B, bot.teamA, bot.spymaster_A, bot.db)
         with open('data.json', 'w') as outfile:
             json.dump(bot.db, outfile)
         bot.game_live = False
