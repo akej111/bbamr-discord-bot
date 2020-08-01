@@ -23,8 +23,6 @@ bot.game_live = False
 
 @bot.command(name='start', help='Start a game of codenames, give players in space seperated list')
 async def start_game(ctx, *args):
-    print("Starting a new game")
-    print(bot.db)
     if bot.game_live:
         await ctx.send("Game still live, cancel or give winner with !finish")
 
@@ -46,9 +44,6 @@ async def start_game(ctx, *args):
 
     bot.spymaster_A = get_team_spymaster(bot.teamA, bot.db)
     bot.spymaster_B = get_team_spymaster(bot.teamB, bot.db)
-
-    print(bot.teamA,  bot.teamB, bot.spymaster_A, bot.spymaster_B)
-    print(testA,  testB, testspymaster_A, testspymaster_B)
 
     response = "Starting game\n----------------\nTeam A: {}\n\tSpymaster: {}\nTeam B: {}\n\tSpymaster: {}"
     response = response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
