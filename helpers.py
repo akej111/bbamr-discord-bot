@@ -35,6 +35,6 @@ def calc_win_percent(wins, loses):
 
 def get_all_players(db):
     player_list = []
-    for key, pair in db:
+    for key, pair in db.items():
         player_list.append((key, pair))
     return player_list
