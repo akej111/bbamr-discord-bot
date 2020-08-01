@@ -107,8 +107,4 @@ async def add_player(ctx, arg):
         }
         await ctx.send("Added {} to the player list!".format(arg))
 
-
-
-
-
 bot.run(TOKEN)
