@@ -1,10 +1,10 @@
 # bot.py
 import os
 import random
-import json
+import simplejson as json
 
 
-from helpers.py import *
+from helpers import *
 from discord.ext import commands
 from dotenv import load_dotenv
 
