@@ -94,7 +94,7 @@ async def leaderboards(ctx, arg):
 
 @bot.command(name='add-player', help='Add a new player (Capitalize their name) put quotes if two words')
 async def add_player(ctx, arg):
-    if char(arg[0].islower():
+    if arg[0].islower():
         await ctx.send("Please capitalize their name")
     elif arg in bot.db:
         await ctx.send("Name already exists")
