@@ -89,8 +89,7 @@ async def leaderboards(ctx, arg):
     for entry in entries:
         response.add_row([entry[0], entry[1]['w'], entry[1]['l'], entry[1]['wp']])
     
-    response = "```\n" + response + "```\n"
+    response = "```\n" + response.get_string() + "```\n"
     await ctx.send(response)
 
 bot.run(TOKEN)
-
