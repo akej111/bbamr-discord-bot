@@ -3,7 +3,7 @@ import os
 import random
 import json
 
-
+from pprint import pprint as print
 from helpers import *
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -17,12 +17,12 @@ spymaster_A = ''
 teamB = []
 spymaster_B = ''
 game_live = False
-
-
 bot = commands.Bot(command_prefix='^')
 
 @bot.command(name='start', help='Start a game of codenames, give players in space seperated list')
 async def start_game(ctx, arg):
+    print("Starting a new game")
+    print(db)
     if game_live:
         await ctx.send("Game still live, cancel or give winner with !finish")
 
