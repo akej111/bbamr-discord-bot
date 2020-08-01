@@ -49,7 +49,7 @@ async def start_game(ctx, *args):
     print(testA,  testB, testspymaster_A, testspymaster_B)
 
     response = "Starting game\n----------------\nTeam A: {} Spymaster: {}\n Team B: {} Spymaster: {}"
-    response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
+    response = response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
     bot.game_live = True
     await ctx.send(response)
 
@@ -60,7 +60,7 @@ async def start_game(ctx, arg):
     if arg == 'cancel':
         bot.game_live = False
         response = "Current game cancelled. Game details\n ----------------\n Team A: {} Spymaster: {}\n Team B {}: Spymaster: {}"
-        response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
+        response = response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
         await ctx.send(response)
     else:
         if arg == A:
@@ -71,7 +71,7 @@ async def start_game(ctx, arg):
             json.dump(bot.db, outfile)
         bot.game_live = False
         response = "Congrats to Team {}, scores have been updated"
-        response.format(arg)
+        response = response.format(arg)
         await ctx.send(response)
 
 bot.run(TOKEN)
