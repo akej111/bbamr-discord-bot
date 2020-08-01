@@ -20,11 +20,21 @@ def finish_game(winner, winner_spy, loser, loser_spy, db):
             db[player]['spymaster'] = 0
         else:
             db[player]['spymaster'] += 1
+        db[player]['wp'] = calc_win_percent(db[player]['w'], db[player]['l'])
     for player in loser:
         db[player]['l'] += 1
         if player == loser_spy:
             db[player]['spymaster'] = 0
         else:
             db[player]['spymaster'] += 1
+        db[player]['wp'] = calc_win_percent(db[player]['w'], db[player]['l'])
 
 
+def calc_win_percent(wins, loses):
+    return round((wins / (wins + loses)), 3)
+
+def get_all_players(db):
+    player_list = []
+    for key, pair in db:
+        player_list.append((key, pair))
+    return player_list

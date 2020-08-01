@@ -7,6 +7,8 @@ from pprint import pprint
 from helpers import *
 from discord.ext import commands
 from dotenv import load_dotenv
+from prettytable import PrettyTable
+
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -73,6 +75,20 @@ async def start_game(ctx, arg):
         response = "Congrats to Team {}, scores have been updated"
         response = response.format(arg)
         await ctx.send(response)
+
+@bot.command(name='leaderboards', help='Show the leaderboards wp to sort by win percentage, wins to sort by number of wins')
+async def leaderboards(ctx, arg):
+    entries = get_all_players(bot.db)
+    if arg == 'wp':
+        entries =  sorted(entries, key = lambda i: (i[1]['wp'], i[1]['wins']), reverse=True) 
+    elif arg == 'wins':
+        entries =  sorted(entries, key = lambda i: (i[1]['wins'], i[1]['wp']), reverse=True) 
+    else:
+        await ctx.send("Argumemt does not exist, put 'wp' for win percentage or 'wins' for wins")
+    response = PrettyTable(['Name', "Wins", "Loses", "Win Percentage"])
+    for entry in entries:
+        response.add_row([entry[0], entry[1]['w'], entry[1]['l'], entry[1]['wp']])
+    await ctx.send(response)
 
 bot.run(TOKEN)
 

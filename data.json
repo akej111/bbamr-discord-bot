@@ -2,31 +2,37 @@
     "Chris": {
         "w": 0,
         "l": 0,
+        "wp": 0.0,
         "spymaster": 99
     },
     "Nick": {
         "w": 0,
         "l": 0,
+        "wp": 0.0,
         "spymaster": 99
     },
     "Zigy": {
         "w": 0,
         "l": 0,
+        "wp": 0.0,
         "spymaster": 99
     },
     "Cedric": {
         "w": 0,
         "l": 0,
+        "wp": 0.0,
         "spymaster": 99
     },
     "Ashton": {
         "w": 0,
         "l": 0,
+        "wp": 0.0,
         "spymaster": 99
     },
     "Andy": {
         "w": 0,
         "l": 0,
+        "wp": 0.0,
         "spymaster": 99
     },
     "Alex": {
@@ -37,6 +43,7 @@
     "Nate": {
         "w": 0,
         "l": 0,
+        "wp": 0.0,
         "spymaster": 99
     }
 }
