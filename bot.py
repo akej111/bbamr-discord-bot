@@ -10,8 +10,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-
-
 bot = commands.Bot(command_prefix='^')
 bot.db = load_players()
 
@@ -38,11 +36,19 @@ async def start_game(ctx, arg):
     bot.teamA = players[:len(players)//2]
     bot.teamB = players[len(players)//2:]
 
+    testA = players[:len(players)//2]
+    testB = players[len(players)//2:]
+
+    testspymaster_A = get_team_spymaster(bot.teamA, bot.db)
+    testspymaster_B = get_team_spymaster(bot.teamB, bot.db)
+
     bot.spymaster_A = get_team_spymaster(bot.teamA, bot.db)
     bot.spymaster_B = get_team_spymaster(bot.teamB, bot.db)
 
+    print(bot.teamA,  bot.teamB, bot.spymaster_A, bot.spymaster_B)
+    print(testA,  testB, testspymaster_A, testspymaster_B)
 
-    response = "Starting game...\nTeam A: {} Spymaster: {}\n Team B: Spymaster: {}"
+    response = "Starting game...\nTeam A: {} Spymaster: {}\n Team B: {} Spymaster: {}"
     response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
     bot.game_live = True
     await ctx.send(response)
