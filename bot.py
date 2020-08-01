@@ -48,7 +48,7 @@ async def start_game(ctx, *args):
     print(bot.teamA,  bot.teamB, bot.spymaster_A, bot.spymaster_B)
     print(testA,  testB, testspymaster_A, testspymaster_B)
 
-    response = "Starting game\n----------------\nTeam A: {} Spymaster: {}\n Team B: {} Spymaster: {}"
+    response = "Starting game\n----------------\nTeam A: {}\n\tSpymaster: {}\nTeam B: {}\n\tSpymaster: {}"
     response = response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
     bot.game_live = True
     await ctx.send(response)
@@ -59,7 +59,7 @@ async def start_game(ctx, arg):
         await ctx.send("No game live, nothing done")
     if arg == 'cancel':
         bot.game_live = False
-        response = "Current game cancelled. Game details\n ----------------\n Team A: {} Spymaster: {}\n Team B {}: Spymaster: {}"
+        response = "Current game cancelled. Game details\n ----------------\n Team A: {}\n\tSpymaster: {}\nTeam B {}\n\tSpymaster: {}"
         response = response.format(', '.join(bot.teamA), bot.spymaster_A, ', '.join(bot.teamB), bot.spymaster_B)
         await ctx.send(response)
     else:
