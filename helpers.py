@@ -1,3 +1,5 @@
+import json
+
 def load_players():
     with open('data.json') as f:
         db = json.load(f)

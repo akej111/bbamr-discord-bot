@@ -1,7 +1,7 @@
 # bot.py
 import os
 import random
-import simplejson as json
+import json
 
 
 from helpers import *
