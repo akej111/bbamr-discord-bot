@@ -2,8 +2,9 @@
 import os
 import random
 import json
-import * from helpers.py
 
+
+from helpers.py import *
 from discord.ext import commands
 from dotenv import load_dotenv
 
